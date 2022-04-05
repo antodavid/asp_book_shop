@@ -1,0 +1,70 @@
+﻿@model Online_Book_Shop.User
+
+
+@using (Html.BeginForm("ValidateLogin", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <div class="panel panel-primary">
+            <div class="panel-heading"><h4>Login</h4></div>
+            <div class="panel-body">
+
+                @if (@ViewBag.InvalidLogin != null)
+                {
+                    <div class="alert alert-warning alert-danger" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <strong> @ViewBag.InvalidLogin </strong>
+                    </div>
+                }
+
+                @if (@ViewBag.SignupSuccess != null)
+                {
+                    <div class="alert alert-success" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <strong> @ViewBag.SignupSuccess </strong>
+                    </div>
+                }
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-md-2"></div>
+                    <div class="btn-toolbar col-md-10" role="group">
+
+                        <input type="submit" value="Login" class="btn btn-info" />
+
+                        <input type="button" value="Forgot Password" onclick="location.href='@Url.Action("ResetPassword", "Home")'" class="btn btn-warning" />
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Signup for new user", "Signup")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

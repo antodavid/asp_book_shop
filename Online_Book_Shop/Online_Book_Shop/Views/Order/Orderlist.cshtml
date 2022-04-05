@@ -1,0 +1,80 @@
+﻿@model IEnumerable<Online_Book_Shop.Models.Order>
+
+@{
+    ViewBag.Title = "Orderlist";
+}
+
+<h2>Recent Orders</h2>
+
+
+<table class="table">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.OrderDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PaymentMethod)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CardNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CardExpDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CardCvv)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShippingAddress)
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaymentMethod)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CardNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CardExpDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CardCvv)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShippingAddress)
+            </td>
+            <td>
+
+                @if (Session["UserName"].ToString() == "admin")
+                {
+
+                    @Html.ActionLink("Edit", "UpdateOrderStatus", new { id = item.Id }) 
+
+                }
+            </td>
+        </tr>
+    }
+
+</table>

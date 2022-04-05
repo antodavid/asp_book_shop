@@ -1,0 +1,88 @@
+﻿@model IEnumerable<Online_Book_Shop.Models.Book>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+@if (@ViewBag.updateCart != null)
+{
+    <div class="alert alert-warning alert-danger" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong> @ViewBag.updateCart </strong>
+    </div>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Autor)
+        </th>
+
+        <th>Action</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Autor)
+            </td>
+
+            <td>
+                @Html.ActionLink("Remove", "Remove", new { id = item.Id })
+            </td>
+        </tr>
+
+
+    }
+
+    <tr>
+
+        <td></td>
+        <th>Total Amount:</th>
+        <th>@ViewBag.OrderAmount</th>
+        <td>
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+
+        <td></td>
+        <td></td>
+        <td></td>
+        <td> </td>
+        <td>
+            <div class="form-group">
+
+                @Html.ActionLink("Place Order", "PlaceOrder", new { amount = @ViewBag.OrderAmount }, new { @class = "btn btn-info" })
+
+            </div>
+        </td>
+    </tr>
+
+</table>
+
+
+
